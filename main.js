@@ -1,10 +1,10 @@
 const container = document.querySelector('.container');
 const sizeEl = document.querySelector('.size');
+let size = sizeEl.value;
 const color = document.querySelector('.color');
 const resetBtn = document.querySelector('.btn');
 let draw = false;
 let zoomLevel = 1;
-let gridSize = 30; // Starting grid size
 
 function populate(size) {
     container.style.setProperty('--size', size);
@@ -31,34 +31,27 @@ window.addEventListener("mouseup", function () {
 });
 
 function reset() {
-    gridSize = 30;
-    zoomLevel = 1;
+    size = sizeEl.value;
+    zoomLevel = 1; // Reset zoom level
     container.style.setProperty('--zoom', zoomLevel);
-    populate(gridSize);
+    populate(size);
 }
 
 resetBtn.addEventListener('click', reset);
 
 sizeEl.addEventListener('keyup', function () {
-    gridSize = Math.min(30, Math.max(1, parseInt(sizeEl.value))); // Limit grid size between 1 and 30
+    size = sizeEl.value;
     reset();
 });
 
 container.addEventListener('wheel', function (event) {
     event.preventDefault();
     if (event.deltaY > 0) {
-        if (gridSize > 1) {
-            gridSize--; // Zoom out by decreasing grid size
-            zoomLevel = Math.max(0.1, zoomLevel - 0.1);
-        }
+        zoomLevel = Math.max(0.1, zoomLevel - 0.1); // Zoom out
     } else {
-        if (gridSize < 30) {
-            gridSize++; // Zoom in by increasing grid size
-            zoomLevel = Math.min(5, zoomLevel + 0.1);
-        }
+        zoomLevel = Math.min(5, zoomLevel + 0.1); // Zoom in
     }
     container.style.setProperty('--zoom', zoomLevel);
-    populate(gridSize);
 });
 
-populate(gridSize); // Start with a 30x30 grid
+populate(30); // Start with a 30x30 grid
