@@ -5,7 +5,6 @@ const resetBtn = document.querySelector('.btn');
 let draw = false;
 let zoomLevel = 1;
 let gridSize = 30; // Starting grid size
-const standardPixelSize = 8; // Standard size of pixels in pixels
 
 function populate(size) {
     container.style.setProperty('--size', size);
@@ -53,13 +52,9 @@ container.addEventListener('wheel', function (event) {
             zoomLevel = Math.max(0.1, zoomLevel - 0.1);
         }
     } else {
-        if (zoomLevel < 1) {
-            zoomLevel = Math.min(1, zoomLevel + 0.1); // Ensure zoom level doesn't exceed 1
-        } else {
-            if (gridSize < 30) {
-                gridSize++; // Zoom in by increasing grid size
-                zoomLevel = Math.min(5, zoomLevel + 0.1);
-            }
+        if (gridSize < 30) {
+            gridSize++; // Zoom in by increasing grid size
+            zoomLevel = Math.min(5, zoomLevel + 0.1);
         }
     }
     container.style.setProperty('--zoom', zoomLevel);
