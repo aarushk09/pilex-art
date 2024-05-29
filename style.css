@@ -37,19 +37,22 @@ body {
 }
 
 .container {
-    --size: 100;
+    --size: 30;
     --zoom: 1;
     width: 800px;
     height: 800px;
     display: grid;
     grid-template-columns: repeat(var(--size), 1fr);
     grid-template-rows: repeat(var(--size), 1fr);
-    gap: 3px;
-    padding: 3px;
+    gap: 1px;
+    overflow: auto;
+    position: relative;
 }
 .pixel {
     background-color: rgb(61, 61, 61);
     border-radius: 2px;
-    width: calc(8px * var(--zoom));
-    height: calc(8px * var(--zoom));
+    width: calc(800px / var(--size) * var(--zoom));
+    height: calc(800px / var(--size) * var(--zoom));
+    min-width: 10px;
+    min-height: 10px;
 }
