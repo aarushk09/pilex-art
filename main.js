@@ -49,13 +49,12 @@ sizeEl.addEventListener('keyup', function () {
 
 container.addEventListener('wheel', function (event) {
     event.preventDefault();
-    if (event.deltaY > 0) {
+    if (event.deltaY > 0 && size > standardSize) {
         zoomLevel = Math.max(0.1, zoomLevel - 0.1); // Zoom out
-    } else {
+    } else if (event.deltaY < 0) {
         zoomLevel = Math.min(5, zoomLevel + 0.1); // Zoom in
     }
     container.style.setProperty('--zoom', zoomLevel);
 });
 
 populate(size); // Start with the initial size of the grid squares
-
