@@ -49,15 +49,14 @@ sizeEl.addEventListener('keyup', function () {
 
 container.addEventListener('wheel', function (event) {
     event.preventDefault();
-    if (event.deltaY < 0 && size < standardSize) {
-        size -= 5; // Increase grid size
-        sizeEl.value = size;
-        reset();
-    } else if (event.deltaY > 0) {
-        size += 5; // Decrease grid size
-        sizeEl.value = size;
-        reset();
+    if (event.deltaY > 0) {
+        size -= 5; // Decrease grid size
+        size = Math.max(1, size); // Ensure size doesn't go below 1
+    } else if (event.deltaY < 0 && size <= standardSize) {
+        size += 5; // Increase grid size
     }
+    sizeEl.value = size;
+    reset();
 });
 
 populate(size); // Start with the initial size of the grid squares
