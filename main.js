@@ -32,6 +32,8 @@ window.addEventListener("mouseup", function () {
 
 function reset() {
     size = sizeEl.value;
+    zoomLevel = 1; // Reset zoom level
+    container.style.setProperty('--zoom', zoomLevel);
     populate(size);
 }
 
@@ -47,10 +49,9 @@ container.addEventListener('wheel', function (event) {
     if (event.deltaY > 0) {
         zoomLevel = Math.max(0.1, zoomLevel - 0.1); // Zoom out
     } else {
-        zoomLevel = Math.min(10, zoomLevel + 0.1); // Zoom in
+        zoomLevel = Math.min(5, zoomLevel + 0.1); // Zoom in
     }
     container.style.setProperty('--zoom', zoomLevel);
-    populate(size);
 });
 
-populate(100); // Start with a 100x100 grid
+populate(30); // Start with a 30x30 grid
