@@ -1,12 +1,12 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-html, body{
+html, body {
     height: 100%;
 }
-body{
+body {
     background-color: blueviolet;
     display: flex;
     justify-content: center;
@@ -14,42 +14,42 @@ body{
     flex-direction: column;
 }
 
-.navbar, .container{
+.navbar, .container {
     background-color: rgb(28, 28, 29);
     width: 800px;
     border-radius: 3px;
 }
-.navbar{
+.navbar {
     padding: 1em;
     margin-bottom: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.btn, input{
+.btn, input {
     height: 35px;
     padding: 0 1em;
 }
-.color{
+.color {
     padding: 0 .25em;
     width: 100px;
     margin: 0 1em;
 }
 
-.container{
+.container {
     --size: 100;
     --zoom: 1;
+    width: 800px;
     height: 800px;
     display: grid;
     grid-template-columns: repeat(var(--size), 1fr);
     grid-template-rows: repeat(var(--size), 1fr);
     gap: 3px;
     padding: 3px;
-    transform: scale(var(--zoom));
-    transform-origin: center center;
-    overflow: hidden;
 }
-.pixel{
+.pixel {
     background-color: rgb(61, 61, 61);
     border-radius: 2px;
+    width: calc(8px * var(--zoom));
+    height: calc(8px * var(--zoom));
 }
