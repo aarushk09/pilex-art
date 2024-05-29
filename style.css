@@ -46,7 +46,7 @@ body{
     gap: 3px;
     padding: 3px;
     transform: scale(var(--zoom));
-    transform-origin: top left;
+    transform-origin: center center;
     overflow: hidden;
 }
 .pixel{
