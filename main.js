@@ -49,7 +49,7 @@ sizeEl.addEventListener('keyup', function () {
 
 container.addEventListener('wheel', function (event) {
     event.preventDefault();
-    if (event.deltaY > 0 && size > standardSize) {
+    if (event.deltaY > 0 && size === standardSize) {
         size -= 5; // Decrease grid size
         sizeEl.value = size;
         reset();
