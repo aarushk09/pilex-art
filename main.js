@@ -1,6 +1,6 @@
 const container = document.querySelector('.container');
 const sizeEl = document.querySelector('.size');
-let size = sizeEl.value;
+let size = parseInt(sizeEl.value);
 const color = document.querySelector('.color');
 const resetBtn = document.querySelector('.btn');
 let draw = false;
@@ -34,7 +34,7 @@ window.addEventListener("mouseup", function () {
 });
 
 function reset() {
-    size = sizeEl.value;
+    size = parseInt(sizeEl.value);
     zoomLevel = 1; // Reset zoom level
     container.style.setProperty('--zoom', zoomLevel);
     populate(size);
@@ -43,18 +43,21 @@ function reset() {
 resetBtn.addEventListener('click', reset);
 
 sizeEl.addEventListener('keyup', function () {
-    size = sizeEl.value;
+    size = parseInt(sizeEl.value);
     reset();
 });
 
 container.addEventListener('wheel', function (event) {
     event.preventDefault();
     if (event.deltaY > 0 && size > standardSize) {
-        zoomLevel = Math.max(0.1, zoomLevel - 0.1); // Zoom out
+        size -= 5; // Decrease grid size
+        sizeEl.value = size;
+        reset();
     } else if (event.deltaY < 0) {
-        zoomLevel = Math.min(5, zoomLevel + 0.1); // Zoom in
+        size += 5; // Increase grid size
+        sizeEl.value = size;
+        reset();
     }
-    container.style.setProperty('--zoom', zoomLevel);
 });
 
 populate(size); // Start with the initial size of the grid squares
