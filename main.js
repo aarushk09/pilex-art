@@ -3,8 +3,8 @@ const sizeEl = document.querySelector('.size');
 let size = sizeEl.value;
 const color = document.querySelector('.color');
 const resetBtn = document.querySelector('.btn');
-const zoomEl = document.querySelector('.zoom');
 let draw = false;
+let zoomLevel = 1;
 
 function populate(size) {
   container.style.setProperty('--size', size);
@@ -42,8 +42,14 @@ sizeEl.addEventListener('keyup', function() {
   reset();
 });
 
-zoomEl.addEventListener('input', function() {
-  container.style.setProperty('--zoom', zoomEl.value);
+container.addEventListener('wheel', function(event) {
+  event.preventDefault();
+  if (event.deltaY > 0) {
+    zoomLevel = Math.max(1, zoomLevel - 0.1); // Zoom out
+  } else {
+    zoomLevel = Math.min(5, zoomLevel + 0.1); // Zoom in
+  }
+  container.style.setProperty('--zoom', zoomLevel);
 });
 
 populate(100); // Start with a 100x100 grid
