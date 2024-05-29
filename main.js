@@ -42,19 +42,24 @@ window.addEventListener("mouseup", function () {
 });
 
 function reset() {
+    const currentColors = []; // Store current colors
+    const pixels = document.querySelectorAll('.pixel');
+    pixels.forEach(pixel => {
+        currentColors.push(pixel.style.backgroundColor);
+    });
+
     size = parseInt(sizeEl.value);
     zoomLevel = 1; // Reset zoom level
     container.style.setProperty('--zoom', zoomLevel);
-    const previousColors = { ...gridColors }; // Copy previous colors
     populate(size);
-    // Set colors of grid squares
-    Object.keys(previousColors).forEach((index) => {
-        const pixel = container.querySelector(`[data-index="${index}"]`);
-        if (pixel) {
-            pixel.style.backgroundColor = previousColors[index];
-        }
+
+    // Restore colors to grid squares
+    const newPixels = document.querySelectorAll('.pixel');
+    newPixels.forEach((pixel, index) => {
+        pixel.style.backgroundColor = currentColors[index];
     });
 }
+
 
 resetBtn.addEventListener('click', reset);
 
