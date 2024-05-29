@@ -6,6 +6,9 @@ const resetBtn = document.querySelector('.btn');
 let draw = false;
 let zoomLevel = 1;
 
+// Initial size of the grid squares
+const standardSize = 30;
+
 function populate(size) {
     container.style.setProperty('--size', size);
     container.innerHTML = ''; // Clear previous grid
@@ -54,4 +57,5 @@ container.addEventListener('wheel', function (event) {
     container.style.setProperty('--zoom', zoomLevel);
 });
 
-populate(30); // Start with a 30x30 grid
+populate(size); // Start with the initial size of the grid squares
+
