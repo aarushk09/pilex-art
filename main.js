@@ -5,9 +5,11 @@ const color = document.querySelector('.color');
 const resetBtn = document.querySelector('.btn');
 let draw = false;
 let zoomLevel = 1;
-
 // Initial size of the grid squares
 const standardSize = 30;
+
+// Store colors of grid squares
+const gridColors = {};
 
 function populate(size) {
     container.style.setProperty('--size', size);
@@ -17,36 +19,45 @@ function populate(size) {
         div.classList.add('pixel');
         div.addEventListener('mouseover', function () {
             if (!draw) return;
+            const pixelIndex = parseInt(div.dataset.index);
+            gridColors[pixelIndex] = color.value;
             div.style.backgroundColor = color.value;
         });
         div.addEventListener('mousedown', function () {
+            const pixelIndex = parseInt(div.dataset.index);
+            gridColors[pixelIndex] = color.value;
             div.style.backgroundColor = color.value;
         });
+        div.dataset.index = i; // Store index as dataset
         container.appendChild(div);
     }
 }
-
 window.addEventListener("mousedown", function () {
     draw = true;
 });
 window.addEventListener("mouseup", function () {
     draw = false;
 });
-
 function reset() {
     size = parseInt(sizeEl.value);
     zoomLevel = 1; // Reset zoom level
     container.style.setProperty('--zoom', zoomLevel);
+    const previousColors = { ...gridColors }; // Copy previous colors
     populate(size);
+    // Set colors of grid squares
+    Object.keys(previousColors).forEach((index) => {
+        const pixel = container.querySelector(`[data-index="${index}"]`);
+        if (pixel) {
+            pixel.style.backgroundColor = previousColors[index];
+        }
+    });
 }
 
 resetBtn.addEventListener('click', reset);
-
 sizeEl.addEventListener('keyup', function () {
     size = parseInt(sizeEl.value);
     reset();
 });
-
 container.addEventListener('wheel', function (event) {
     event.preventDefault();
     if (event.deltaY < 0 && size <= standardSize) {
