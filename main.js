@@ -45,7 +45,7 @@ sizeEl.addEventListener('keyup', function() {
 container.addEventListener('wheel', function(event) {
   event.preventDefault();
   if (event.deltaY > 0) {
-    zoomLevel = Math.max(1, zoomLevel - 0.1); // Zoom out
+    zoomLevel = Math.max(0.1, zoomLevel - 0.1); // Zoom out
   } else {
     zoomLevel = Math.min(5, zoomLevel + 0.1); // Zoom in
   }
